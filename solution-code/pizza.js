@@ -29,6 +29,9 @@ function defaultValues () {
   // Ingredients list
   $(".panel.price").find("ul").find("li:contains('sauce')").toggle();
   $(".panel.price").find("ul").find("li:contains('crust')").toggle();
+
+  // Total price
+  updatePrice();
 }
 
 function btnHandler(triggerClass, targetClass, toggleClass) {
@@ -51,5 +54,20 @@ function updateIngredientsList(ingredient) {
 }
 
 function updatePrice() {
+  var prices      = $(".panel.price");
+  var base        = $(prices).find("b:first");
+  var total       = $(prices).find("strong:last");
+  var ingredients = $(prices).find("ul").find("li:visible");
+  var totalPrice  = getPrice(base);
 
+  $.each(ingredients, function(index, ingredient){
+    totalPrice += getPrice(ingredient);
+  });
+
+  $(total).html("$" + totalPrice);
+}
+
+function getPrice(ingredient) {
+  price = $(ingredient).html().split(" ")[0];
+  return parseInt(price.replace("$", ""));
 }
