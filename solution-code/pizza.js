@@ -36,7 +36,7 @@ function btnHandler(triggerClass, targetClass, toggleClass) {
     toggleClass ? $(targetClass).toggleClass(toggleClass) : $(targetClass).toggle();
     changeButtonStyle($(this));
     updateIngredientsList(targetClass);
-    // updatePrice($(this), targetClass);
+    updatePrice();
   });
 }
 
@@ -45,22 +45,11 @@ function changeButtonStyle(button) {
 }
 
 function updateIngredientsList(ingredient) {
-  ingredient = ingredient.replace(".", "");
-  var element = $(".panel.price").find("ul").find("li:contains('" + ingredient + "')");
+  ingredient = ingredient.replace(".", "").split("-");
+  var element = $(".panel.price").find("ul").find("li:contains('" + ingredient[0] + "')");
   element.toggle();
 }
 
-// function updatePrice(button, ingredient) {
-//   ingredient = ingredient.replace(".", "");
-//   price      = prices[ingredient];
-//
-//   if ($(button).hasClass("active")) {
-//     price *= -1;
-//   }
-//
-//   updateTotal(price);
-// }
-//
-// function updateTotal (price) {
-//
-// }
+function updatePrice() {
+
+}
